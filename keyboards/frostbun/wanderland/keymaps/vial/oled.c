@@ -1,1 +1,1 @@
-/home/manh/workspace/vial-qmk/keyboards/frostbun/common/bongo_wpm.c
+../../../common/bongo_wpm.c
