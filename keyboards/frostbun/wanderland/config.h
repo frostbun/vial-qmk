@@ -33,7 +33,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Keyboard Matrix Assignments */
 #define MATRIX_ROW_PINS { F4, F1, E6, E2, C7, D4 }
 #define MATRIX_COL_PINS { F5, F6, B4, D7, D6, D5, D2, D3, B0, F0, B1, B2, B3 }
-#define UNUSED_PINS
 
 /* COL2ROW, ROW2COL */
 #define DIODE_DIRECTION COL2ROW
@@ -44,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* RGB Underglow */
 #define RGB_DI_PIN F7
 #define RGBLED_NUM 18
-#define RGBLIGHT_DEFAULT_HUE 170
+#define RGBLIGHT_DEFAULT_HUE 0
 #define RGBLIGHT_DEFAULT_SAT 255
 #define RGBLIGHT_DEFAULT_VAL 127
 // #define RGBLIGHT_HUE_STEP 8

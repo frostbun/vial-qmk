@@ -84,9 +84,7 @@ static void render_anim(void) {
 
         #ifdef WPM_ENABLE
         oled_set_cursor(18, 3);
-        static char wpm_str[4];
-        sprintf(wpm_str, "%03d", get_current_wpm());
-        oled_write(wpm_str, false);
+        oled_write(get_u8_str(get_current_wpm(), '0'), false);
         #endif
     }
 
