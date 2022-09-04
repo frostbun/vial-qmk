@@ -3,8 +3,6 @@
 
 #ifdef OLED_ENABLE
 
-#include <stdio.h>
-
 #define IDLE_FRAMES 5
 #define TAP_FRAMES 2
 #define ANIM_FRAME_DURATION 200

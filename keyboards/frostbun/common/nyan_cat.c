@@ -3,8 +3,6 @@
 
 #ifdef OLED_ENABLE
 
-#include <stdio.h>
-
 #define FRAMES 4
 #define ANIM_FRAME_DURATION 100
 #define ANIM_SIZE 512
