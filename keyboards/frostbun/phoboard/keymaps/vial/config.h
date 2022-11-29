@@ -10,5 +10,5 @@
 #define DYNAMIC_KEYMAP_LAYER_COUNT 2
 
 #define OLED_BRIGHTNESS 127         // 1/2
-#define OLED_TIMEOUT 10000          // 10s
-#define OLED_UPDATE_INTERVAL 100    // 10fps
+// #define OLED_TIMEOUT 10000          // 10s
+// #define OLED_UPDATE_INTERVAL 100    // 10fps

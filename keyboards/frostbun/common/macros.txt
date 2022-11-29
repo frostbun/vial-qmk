@@ -1,0 +1,4 @@
+[["down", "KC_LGUI"], ["tap", "KC_UP"], ["up", "KC_LGUI"]]
+[["down", "KC_LALT"], ["tap", "KC_UP"], ["up", "KC_LALT"]]
+[["down", "KC_LALT"], ["tap", "KC_DOWN"], ["up", "KC_LALT"]]
+[["tap", "KC_UP", "KC_HOME"], ["text", "sudo "], ["tap", "KC_END"]]
