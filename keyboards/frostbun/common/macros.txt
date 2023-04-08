@@ -2,3 +2,4 @@
 [["down", "KC_LALT"], ["tap", "KC_UP"], ["up", "KC_LALT"]]
 [["down", "KC_LALT"], ["tap", "KC_DOWN"], ["up", "KC_LALT"]]
 [["tap", "KC_UP", "KC_HOME"], ["text", "sudo "], ["tap", "KC_END"]]
+[["tap", "KC_UP", "KC_HOME"], ["down", "KC_LCTRL"], ["tap", "KC_DELETE"], ["up", "KC_LCTRL"]]
