@@ -1,1 +1,1 @@
-../../../common/bongo_wpm.c
+../../../common/nyan_cat.c

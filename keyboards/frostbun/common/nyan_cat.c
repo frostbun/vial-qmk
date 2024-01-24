@@ -4,10 +4,15 @@
 #ifdef OLED_ENABLE
 
 #define FRAMES 4
-#define ANIM_FRAME_DURATION 100
+#define REFRESH_DURATION 75
+#define DEFAULT_ANIM_DURATION 150
 #define ANIM_SIZE 512
+#define OLED_TIMEOUT_MS 10000
 
-uint32_t anim_timer = 0;
+uint32_t last_frame_time = 0;
+uint16_t refresh_timer = 0;
+uint16_t anim_timer = 0;
+uint32_t sleep_timer = 0;
 uint8_t current_frame = 0;
 
 static void render_anim(void) {
@@ -151,11 +156,52 @@ static void render_anim(void) {
         }
     };
 
-    if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-        anim_timer = timer_read32();
-        current_frame = (current_frame + 1) % FRAMES;
-        oled_write_raw_P(anim[current_frame], ANIM_SIZE);
+    void indicators(void) {
+        const layer_state_t layer = get_highest_layer(layer_state);
+        oled_set_cursor(0, 0);
+        oled_write_P(PSTR("Base"), layer == 0);
+        oled_set_cursor(0, 1);
+        oled_write_P(PSTR("Navi"), layer == 1);
+
+        oled_set_cursor(5, 0);
+        oled_write_P(PSTR("Caps"), host_keyboard_led_state().caps_lock);
+
+        #ifdef WPM_ENABLE
+        oled_set_cursor(10, 0);
+        oled_write(get_u8_str(get_current_wpm(), '0'), false);
+        #endif
     }
+
+    if (timer_elapsed32(sleep_timer) > OLED_TIMEOUT_MS) {
+        oled_off();
+    } else {
+        uint32_t time_elapsed = timer_elapsed32(last_frame_time);
+        last_frame_time = timer_read32();
+        refresh_timer += time_elapsed;
+        anim_timer += time_elapsed;
+        if (refresh_timer > REFRESH_DURATION) {
+            refresh_timer -= REFRESH_DURATION;
+            uint16_t anim_duration = DEFAULT_ANIM_DURATION;
+            #ifdef WPM_ENABLE
+            uint8_t wpm = get_current_wpm();
+            if (wpm < 10) wpm = 10;
+            if (wpm > 100) wpm = 100;
+            anim_duration = 5000 / wpm;
+            #endif
+            if (anim_timer > anim_duration) {
+                anim_timer -= anim_duration;
+                current_frame = (current_frame + 1) % FRAMES;
+            }
+            oled_on();
+            oled_write_raw_P(anim[current_frame], ANIM_SIZE);
+            indicators();
+        }
+    }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    sleep_timer = timer_read32();
+    return true;
 }
 
 bool oled_task_user(void) {
